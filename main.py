@@ -1,9 +1,20 @@
+import json
 from openai import OpenAI
 
-with open('.api_key', 'r') as file:
-    api_key = file.read().strip()
+# 读取配置文件
+with open('config.json', 'r') as file:
+    config = json.load(file)
 
-client = OpenAI(api_key=api_key, base_url="https://api.deepseek.com")
+api_key = config['api_key']
+base_url = config['base_url']
+system_message_1 = config['system_message_1']
+system_message_2 = config['system_message_2']
+trigger_message = config['trigger_message']
+end_flag = config['end_flag']
+max_turns = config['max_turns']
+
+client = OpenAI(api_key=api_key, base_url=base_url)
+
 def generate_ai_response(dialogue_history, system_message):
     # 将系统消息和对话历史拼接为 API 输入
     messages = [{"role": "system", "content": system_message}]
@@ -57,14 +68,8 @@ def ai_dialogue(system_message_1, system_message_2, trigger_message, end_flag, m
     
     return dialogue
 
-# 示例输入参数
-system_message_1 = "你是一个老师，喜欢回答同学的提问。"
-system_message_2 = "你是一个学生，喜欢刨根问底。"
-trigger_message = "计算机为什么是二进制的"
-end_flag = "再见"
-
 # 执行对话
-dialogue = ai_dialogue(system_message_1, system_message_2, trigger_message, end_flag)
+dialogue = ai_dialogue(system_message_1, system_message_2, trigger_message, end_flag, max_turns)
 
 # 输出对话内容
 # for line in dialogue:
