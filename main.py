@@ -12,17 +12,18 @@ system_message_2 = config['system_message_2']
 trigger_message = config['trigger_message']
 end_flag = config['end_flag']
 max_turns = config['max_turns']
+model = config['model']
 
 client = OpenAI(api_key=api_key, base_url=base_url)
 
-def generate_ai_response(dialogue_history, system_message):
+def generate_ai_response(dialogue_history, system_message, model):
     # 将系统消息和对话历史拼接为 API 输入
     messages = [{"role": "system", "content": system_message}]
     messages.extend(dialogue_history)
     
     # 调用 OpenAI API
     response = client.chat.completions.create(
-        model="deepseek-chat",
+        model=model,
         messages=messages
     )
     return response.choices[0].message.content
@@ -46,7 +47,7 @@ def ai_dialogue(system_message_1, system_message_2, trigger_message, end_flag, m
             dialogue_history = ai2_history
         
         # 生成 AI 的回复
-        ai_response = generate_ai_response(dialogue_history, system_message)
+        ai_response = generate_ai_response(dialogue_history, system_message, model)
         dialogue.append(f"{current_speaker}: {ai_response}")
         print(f"{current_speaker}: {ai_response}")
         
