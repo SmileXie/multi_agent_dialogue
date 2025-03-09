@@ -1,0 +1,12 @@
+{
+    "api_key": "xxxxxxxxxxxxxxxxx",
+    "base_url": "https://api.deepseek.com",
+    "model": "deepseek-chat",
+    "AI1_name": "苏雨晴",
+    "AI2_name": "顾远", 
+    "AI1_character": "你是一个老师，喜欢回答同学的提问。",
+    "AI2_character": "你是一个学生，喜欢刨根问底",
+    "trigger_message": "老师，计算机为什么是二进制的。",
+    "end_flag": "bye",
+    "max_turns": 10
+}
