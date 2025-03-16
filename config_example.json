@@ -1,12 +1,14 @@
 {
-    "api_key": "xxxxxxxxxxxxxxxxx",
-    "base_url": "https://api.deepseek.com",
-    "model": "deepseek-chat",
-    "AI1_name": "苏雨晴",
-    "AI2_name": "顾远", 
+    "api_key": "sk-xxx",
+    "base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+    "model": "deepseek-v3",
+    "AI1_name": "张老师",
+    "AI2_name": "陈同学", 
     "AI1_character": "你是一个老师，喜欢回答同学的提问。",
     "AI2_character": "你是一个学生，喜欢刨根问底",
     "trigger_message": "老师，计算机为什么是二进制的。",
-    "end_flag": "bye",
-    "max_turns": 10
+    "end_flag": "",
+    "max_turns": 10,
+    "history_length": 10,
+    "record_file": "record.txt"
 }
