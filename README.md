@@ -1,13 +1,23 @@
 # Multi Agent Dialogue
 
-一个AI对话框架，基于大语言模型，快速配置两个相互对话AI Agent。打印并记录两个AI的对话文字
+一个AI对话框架，基于大语言模型，快速配置两个相互对话AI Agent。打印并记录两个AI的对话文字。
+两个对话的AI Agent可以完全模拟人类的对话。
 
 # 配置与使用说明
+
+首先，你要申请一个兼容openai SDK的LLM API接口。例如：[DeepSeek API Docs](https://api-docs.deepseek.com/zh-cn/) 或 [大模型服务平台百炼](https://help.aliyun.com/zh/model-studio/getting-started/what-is-model-studio?spm=5176.29619931.J_AHgvE-XDhTWrtotIBlDQQ.12.3f86521cS9GON8)。向LLM服务提供商申请API KEY并充值。
 
 python3环境中安装openai SDK：
 
 ```
 pip3 install openai
+```
+
+拷贝项目代码到本地：
+
+```
+git clone https://github.com/SmileXie/multi_agent_dialogue.git
+cd multi_agent_dialogue
 ```
 
 在multi_agent_diaglue目录下新增配置文件：
@@ -19,8 +29,8 @@ pip3 install openai
     "model": "deepseek-v3",
     "AI1_name": "张老师",
     "AI2_name": "陈同学", 
-    "AI1_character": "你是一个老师，喜欢回答同学的提问。",
-    "AI2_character": "你是一个学生，喜欢刨根问底",
+    "AI1_character": "你是一个老师，喜欢回答同学的提问。不厌其烦。",
+    "AI2_character": "你是一个学生，对世界充满好奇，喜欢刨根问底。",
     "trigger_message": "老师，计算机为什么是二进制的。",
     "end_flag": "",
     "max_turns": 10,
