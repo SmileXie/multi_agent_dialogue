@@ -66,6 +66,9 @@ def ai_dialogue(client, ai1_name, ai2_name, ai1_system_message, ai2_system_messa
             if len(end_flag) > 0 and (end_flag in ai_response):
                 return dialogue
             
+            if ai_response == "[END]":
+                return dialogue
+            
             current_speaker = ai2_name if current_speaker == ai1_name else ai1_name
     
     return dialogue
@@ -107,15 +110,20 @@ if __name__ == "__main__":
         * 在输出的文字中，只能输出对话内容，内心活动、场景切换、旁白等不要输出。例如：禁止输出以下文字中括号中的内容：好的我走了！(飞快地收拾书包，准备离开)'\n\
         你的人物设定是："
     """
+    
+    shared_system_message = """请你基于你的人物设定，与你的对话对象进行交流。要求如下：
 
-    shared_system_message = "请你基于你的人物设定，模拟最自然最真实人类的对话，与你的对话对象进行交流。要求如下：\n\
-        * 当对话涉及场景切换时，可以在下一轮对话中进入新的场景。例如：'A：再见，明天见，明天早8点在教学楼哦。B：不早了，明天见。A：早上好啊。B：早上好，我们一起去教室吧。'。\n\
-        * 在输出的文字中，只能输出对话内容，内心活动、场景切换、旁白等不要输出。例如：禁止输出以下文字中括号中的内容：好的我走了！(飞快地收拾书包，准备离开)'\n\
-        你的人物设定是："
+* 在输出的文字中，只能输出对话内容，即只能输出说出口的内容，不要输出内心活动、场景切换、旁白等。例如：禁止输出以下文字中括号中的内容：好的我走了！(飞快地收拾书包，准备离开)'
+* 双方的对话自然进展，当双方进展到相互道别（说“再见”，“明天见”，“一会儿见”，“Bye Bye”等道别用语）后，你认为对话应该要结束时，请输出"[END]"，且仅输出"[END]"，禁止在其它内容之后加上"[END]"
+    * 正确的例子：‘A: 再见了，谢谢您。B: 不客气，再见。A：[END]’
+    * 错误的例子：‘A: 再见了，谢谢您。B: 不客气，再见。[END]’
+* 模拟最自然最真实人类的对话。
+
+你的人物设定是："""
 
     AI1_system_message = shared_system_message + "你是" + config["AI1_name"] + "，" + config["AI1_character"] \
-        + "。\n" + "你现在的对话对象是：" + config["AI2_name"]
+        + "\n" + "你现在的对话对象是：" + config["AI2_name"]
     AI2_system_message = shared_system_message + "你是" + config["AI2_name"] + "，" + config["AI2_character"] \
-        + "。\n" + "你现在的对话对象是：" + config["AI1_name"]
+        + "\n" + "你现在的对话对象是：" + config["AI1_name"]
     dialogue = ai_dialogue(client, AI1_name, AI2_name, AI1_system_message, AI2_system_message, config['trigger_message'], 
                         config["end_flag"], config["record_file"], config["max_turns"], config['history_length'])
