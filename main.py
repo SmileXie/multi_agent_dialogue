@@ -14,16 +14,55 @@ def generate_ai_response(client, dialogue_history, system_message, model):
     messages = [{"role": "system", "content": system_message}]
     messages.extend(dialogue_history)
     
-    # 调用 OpenAI API
     response = client.chat.completions.create(
         model=model,
         messages=messages
     )
     return response.choices[0].message.content
 
+def get_end_probability(client, input_dialogue, model):
+    system_message = """
+我会给你输入一些对话的内容，请你从一个普通人的角度，帮我分析，对话是否会在下一轮结束。请给出一个0~1之间的浮点数，表示会话结束的概率。0表示对话肯定会继续，1表示对话肯定会在下一轮结束。
+你只能根据你的判断输出一个浮点数，不要输出其他内容。
+
+例子1：
+
+* 输入：
+    * A：你好，今天天气怎么样？
+    * B：不错呢，你打算去做什么？
+* 输出：0.1
+
+例子2：
+
+* 输入：
+    * A：我们明天见，9点记得到公司
+    * B：ByeBye，明天见
+    * A：再见
+* 输出：0.95
+"""
+
+    messages=[
+        {"role": "system", "content": system_message},
+        {"role": "user", "content": input_dialogue},
+    ]
+    response = client.chat.completions.create(
+        model=model,
+        messages=messages
+    )
+    end_probability = response.choices[0].message.content
+
+    end_probability_float = 0
+    try:
+        end_probability_float = float(end_probability)
+    except ValueError:
+        # keep end_probability_float as 0
+        pass
+
+    return end_probability_float
+
 def ai_dialogue(client, ai1_name, ai2_name, ai1_system_message, ai2_system_message, trigger_message, end_flag, 
                 record_file, max_turns=10, history_length=20):
-    dialogue = []  # 用于存储完整的对话内容
+    dialogue_recent = []  # recent 10 dialogue contents, for "end analysis"
     ai1_history = []  # AI 1 的对话历史
     ai2_history = []  # AI 2 的对话历史
     current_speaker = AI1_name  # 当前发言者
@@ -45,7 +84,6 @@ def ai_dialogue(client, ai1_name, ai2_name, ai1_system_message, ai2_system_messa
             
             # 生成 AI 的回复
             ai_response = generate_ai_response(client, dialogue_history, system_message, config['model'])
-            dialogue.append(f"{current_speaker}: {ai_response}")
             print(f"{current_speaker}: {ai_response}")
             record_file.write(f"{current_speaker}: {ai_response}\n")
             
@@ -62,16 +100,21 @@ def ai_dialogue(client, ai1_name, ai2_name, ai1_system_message, ai2_system_messa
             if len(ai2_history) > history_length:
                 ai2_history.pop(0)
 
+            dialogue_recent.append(f"{current_speaker}: {ai_response}")
+            dialogue_recent = dialogue_recent[-10:] # keep recent 10 dialogue contents
+            end_probability = get_end_probability(client, "\n".join(dialogue_recent), config['model'])
+            record_file.write(f"End probability: {end_probability}\n")
+
             # 检查是否达到结束标志
             if len(end_flag) > 0 and (end_flag in ai_response):
-                return dialogue
+                return
             
-            if ai_response == "[END]":
-                return dialogue
+            if end_probability >= 0.9:
+                return
             
             current_speaker = ai2_name if current_speaker == ai1_name else ai1_name
     
-    return dialogue
+    return
 
 if __name__ == "__main__":
 
@@ -114,9 +157,6 @@ if __name__ == "__main__":
     shared_system_message = """请你基于你的人物设定，与你的对话对象进行交流。要求如下：
 
 * 在输出的文字中，只能输出对话内容，即只能输出说出口的内容，不要输出内心活动、场景切换、旁白等。例如：禁止输出以下文字中括号中的内容：好的我走了！(飞快地收拾书包，准备离开)'
-* 双方的对话自然进展，当双方进展到相互道别（说“再见”，“明天见”，“一会儿见”，“Bye Bye”等道别用语）后，你认为对话应该要结束时，请输出"[END]"，且仅输出"[END]"，禁止在其它内容之后加上"[END]"
-    * 正确的例子：‘A: 再见了，谢谢您。B: 不客气，再见。A：[END]’
-    * 错误的例子：‘A: 再见了，谢谢您。B: 不客气，再见。[END]’
 * 模拟最自然最真实人类的对话。
 
 你的人物设定是："""
@@ -125,5 +165,5 @@ if __name__ == "__main__":
         + "\n" + "你现在的对话对象是：" + config["AI2_name"]
     AI2_system_message = shared_system_message + "你是" + config["AI2_name"] + "，" + config["AI2_character"] \
         + "\n" + "你现在的对话对象是：" + config["AI1_name"]
-    dialogue = ai_dialogue(client, AI1_name, AI2_name, AI1_system_message, AI2_system_message, config['trigger_message'], 
+    ai_dialogue(client, AI1_name, AI2_name, AI1_system_message, AI2_system_message, config['trigger_message'], 
                         config["end_flag"], config["record_file"], config["max_turns"], config['history_length'])
