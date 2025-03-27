@@ -27,14 +27,14 @@ cd multi_agent_dialogue
     "api_key": "sk-xxx",
     "base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
     "model": "deepseek-v3",
-    "AI1_name": "张老师",
-    "AI2_name": "陈同学", 
+    "AI1_name": "康熙皇帝",
+    "AI2_name": "秦始皇", 
     "AI1_character": "你是中国历史上的康熙皇帝",
     "AI2_character": "你是中国历史上的秦始皇",
     "trigger_message": "朕的大秦帝国是不是已经延续了千秋万代啦？哈哈，你是哪位？",
     "end_flag": "",
-    "max_turns": 10,
-    "history_length": 10,
+    "max_turns": 100,
+    "history_length": 100,
     "record_file": "record.txt"
 }
 ```
