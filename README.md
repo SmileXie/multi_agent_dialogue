@@ -3,7 +3,18 @@
 一个AI对话框架，基于大语言模型，快速配置两个相互对话AI Agent。打印并记录两个AI的对话文字。
 两个对话的AI Agent可以完全模拟人类的对话。
 
-# 配置与使用说明
+# 原理说明
+
+![软件架构](/img/design.drawio.png)
+
+在框架中设置了三个AI：
+
+* AI1和AI2从配置文件中获取角色定义，以配置文件要求的角色的视角展开对话。AI1和AI2都存有一定量的对话历史，以保证对话的前后一致性。
+* END Porbability monitor AI用于监控AI1和AI2的对话，根据对话内容判断对话应该结束的概率。例如，当两个角色互相道别“再见”后，对话应该结束的概率就在90%以上。
+
+程序根据END Porbability monitor AI计算出的对话结束概率，适时结束对话。
+
+# Quick Start
 
 首先，你要申请一个兼容openai SDK的LLM API接口。例如：[DeepSeek API Docs](https://api-docs.deepseek.com/zh-cn/) 或 [大模型服务平台百炼](https://help.aliyun.com/zh/model-studio/getting-started/what-is-model-studio?spm=5176.29619931.J_AHgvE-XDhTWrtotIBlDQQ.12.3f86521cS9GON8)。向LLM服务提供商申请API KEY并充值。
 

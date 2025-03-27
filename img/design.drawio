@@ -1,0 +1,73 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36" version="26.1.3">
+  <diagram name="第 1 页" id="Lg8REVvZiUB5NNv8vLVV">
+    <mxGraphModel dx="1114" dy="551" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="wppLwrwgf0rxI7LfoE-R-1" value="END Porbability monitor AI" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="140" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wppLwrwgf0rxI7LfoE-R-2" value="AI 1" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="400" y="80" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wppLwrwgf0rxI7LfoE-R-3" value="AI 2" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="400" y="240" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wppLwrwgf0rxI7LfoE-R-4" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="wppLwrwgf0rxI7LfoE-R-3" target="wppLwrwgf0rxI7LfoE-R-2">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="310" as="sourcePoint" />
+            <mxPoint x="430" y="150" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="wppLwrwgf0rxI7LfoE-R-5" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.667;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.667;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="wppLwrwgf0rxI7LfoE-R-2" target="wppLwrwgf0rxI7LfoE-R-3">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="310" as="sourcePoint" />
+            <mxPoint x="440" y="260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="wppLwrwgf0rxI7LfoE-R-6" value="AI1和AI2按设定的角色对话" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=default;" vertex="1" parent="1">
+          <mxGeometry x="460" y="190" width="106" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="wppLwrwgf0rxI7LfoE-R-8" value="config.json" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;" vertex="1" parent="1">
+          <mxGeometry x="660" y="150" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="wppLwrwgf0rxI7LfoE-R-9" value="" style="endArrow=classic;html=1;rounded=0;exitX=-0.008;exitY=0.038;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="wppLwrwgf0rxI7LfoE-R-8" target="wppLwrwgf0rxI7LfoE-R-2">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="310" as="sourcePoint" />
+            <mxPoint x="440" y="260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="wppLwrwgf0rxI7LfoE-R-11" value="AI1的角色设定" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="wppLwrwgf0rxI7LfoE-R-9">
+          <mxGeometry x="0.0533" y="3" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="wppLwrwgf0rxI7LfoE-R-10" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.017;exitY=0.85;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="1" source="wppLwrwgf0rxI7LfoE-R-8" target="wppLwrwgf0rxI7LfoE-R-3">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="310" as="sourcePoint" />
+            <mxPoint x="440" y="260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="wppLwrwgf0rxI7LfoE-R-12" value="AI2的角色设定" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="wppLwrwgf0rxI7LfoE-R-10">
+          <mxGeometry x="0.2931" y="2" relative="1" as="geometry">
+            <mxPoint x="19" y="-3" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="wppLwrwgf0rxI7LfoE-R-13" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="400" y="160" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="wppLwrwgf0rxI7LfoE-R-14" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="wppLwrwgf0rxI7LfoE-R-1" target="wppLwrwgf0rxI7LfoE-R-13">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="310" as="sourcePoint" />
+            <mxPoint x="440" y="260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="wppLwrwgf0rxI7LfoE-R-15" value="监控对话，&lt;div&gt;避免对话无限制的进行下去&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="wppLwrwgf0rxI7LfoE-R-14">
+          <mxGeometry x="-0.19" y="-2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
